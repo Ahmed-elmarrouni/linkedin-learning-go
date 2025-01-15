@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	// fmt.Println("Structs")
 
 	// states := make(map[string]string)
@@ -73,4 +74,18 @@ func main() {
 	for i := range keys {
 		fmt.Println(states[keys[i]])
 	}
+
+	fmt.Println("----------------------------------------")
+
+	poodle := Dog{"Poodle", 10}
+	fmt.Println(poodle)
+	fmt.Printf("%v+\n", poodle)
+	fmt.Printf("Breed :  %v\n weight :  %v\n ", poodle.Breed, poodle.Weight)
+	poodle.Weight = 9
+	fmt.Printf("Breed is %v\n  weight :  %v\n", poodle.Breed, poodle.Weight)
+}
+
+type Dog struct {
+	Breed  string
+	Weight int
 }
