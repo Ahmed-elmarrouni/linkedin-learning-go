@@ -32,4 +32,16 @@ func main() {
 	colors = append(colors, "Yellow", "Purple")
 	fmt.Println(colors)
 
+	// remove the first item from the slice
+	colors = append(colors[1:len(colors)])
+	fmt.Println("remove the first an item", colors)
+
+	// remove the last item from the slice
+	colors = append(colors[:len(colors)-1])
+	fmt.Println("remove the last item", colors)
+
+	// remove the item from the middle of the slice
+	colors = append(colors[:2], colors[3:]...)
+	fmt.Println(colors)
+
 }
