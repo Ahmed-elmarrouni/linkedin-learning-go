@@ -2,35 +2,31 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"io/ioutil"
+	"os"
 )
 
 func main() {
-	poodle := Dog{"Poodle", 10, "Woof!"}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+	fileConetent := "Hello, My name is Ahmed"
+	file, err := os.Create("./ahmedFile.txt")
+	checkErr(err)
+	length, err := io.WriteString(file, fileConetent)
+	checkErr(err)
+	fmt.Printf("wrote file with %v characters\n", length)
+	defer file.Close()
 
-	poodle.Speak()
-	poodle.Sound = "Arf!"
-	poodle.Speak()
-	poodle.SpeakThreeTimes()
-	poodle.SpeakThreeTimes()
+	defer readFile("./ahmedFile.txt")
 }
 
-// Dog is a struct
-type Dog struct {
-	Breed  string
-	Weight int
-	Sound  string
+func checkErr(err error) {
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
-// Speak is how the dog speaks
-func (d Dog) Speak() {
-	fmt.Println(d.Sound)
-}
-
-// SpeakThreeTimes is how the dog speaks loudly
-func (d Dog) SpeakThreeTimes() {
-	d.Sound = fmt.Sprintf("%v %v %v", d.Sound, d.Sound, d.Sound)
-	fmt.Println(d.Sound)
+func readFile(fileName string) {
+	data, err := ioutil.ReadFile(fileName)
+	checkErr(err)
+	fmt.Println("File content: ", string(data))
 }
